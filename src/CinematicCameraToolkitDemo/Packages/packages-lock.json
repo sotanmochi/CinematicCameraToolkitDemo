@@ -153,6 +153,12 @@
         "com.unity.searcher": "4.9.3"
       }
     },
+    "com.unity.springbone": {
+      "version": "file:com.unity.springbone",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.test-framework": {
       "version": "1.6.0",
       "depth": 0,
