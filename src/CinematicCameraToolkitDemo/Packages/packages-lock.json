@@ -194,6 +194,14 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "com.unity.universaltoonshader.urp": {
+      "version": "file:com.unity.universaltoonshader.urp",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "7.3.1"
+      }
+    },
     "com.unity.visualscripting": {
       "version": "1.9.7",
       "depth": 0,
