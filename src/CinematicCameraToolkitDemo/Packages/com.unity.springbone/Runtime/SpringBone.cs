@@ -62,7 +62,17 @@ namespace Unity.Animations.SpringBones
 
             InitializeSpringLengthAndTipPosition();
         }
-        
+
+        public void ResetToInitialPose()
+        {
+            transform.localRotation = initialLocalRotation;
+            actualLocalRotation = initialLocalRotation;
+
+            var childPosition = ComputeChildPosition();
+            currTipPos = childPosition;
+            prevTipPos = childPosition;
+        }
+
         public Vector3 ComputeChildPosition()
         {
             var children = GetValidChildren(transform);

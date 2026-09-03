@@ -125,8 +125,68 @@ namespace Unity.Animations.SpringBones
             }
         }
 
+        /// <summary>
+        /// Run one simulation step with the specified delta time.
+        /// Can be called from outside LateUpdate at any time.
+        /// </summary>
+        public void SimulateStep(float deltaTime)
+        {
+            if (springBones == null) return;
+
+            var boneCount = springBones.Length;
+            for (var boneIndex = 0; boneIndex < boneCount; boneIndex++)
+            {
+                var springBone = springBones[boneIndex];
+                if (springBone.enabled)
+                {
+                    var sumOfForces = GetSumOfForcesOnBone(springBone);
+                    springBone.UpdateSpring(deltaTime, sumOfForces);
+                    springBone.SatisfyConstraintsAndComputeRotation(
+                        deltaTime, boneIsAnimatedStates[boneIndex] ? dynamicRatio : 1f);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fast-forward the spring bone simulation.
+        /// Runs multiple simulation steps within a single frame.
+        /// Skips this manager's next automatic LateUpdate so the fast-forwarded frame
+        /// is not advanced by an extra step when automaticUpdates is enabled.
+        /// </summary>
+        /// <param name="totalTime">Total seconds to simulate (default: 2s)</param>
+        /// <param name="deltaTime">Delta time per step; zero or less uses 1 / simulationFrameRate</param>
+        /// <returns>Number of simulation steps executed</returns>
+        public int FastForward(float totalTime, float deltaTime = 0f)
+        {
+            if (deltaTime <= 0f)
+            {
+                deltaTime = (simulationFrameRate > 0) ? (1f / simulationFrameRate) : (1f / 60f);
+            }
+
+            skipNextAutoUpdate = true;
+
+            var steps = Mathf.CeilToInt(totalTime / deltaTime);
+            for (var i = 0; i < steps; i++)
+            {
+                SimulateStep(deltaTime);
+            }
+
+            return steps;
+        }
+
+        public void ResetAllBones()
+        {
+            if (springBones == null) return;
+
+            foreach (var spring in springBones)
+            {
+                spring.ResetToInitialPose();
+            }
+        }
+
         // private
 
+        private bool skipNextAutoUpdate = false;
         private bool[] boneIsAnimatedStates;
         private ForceProvider[] forceProviders;
 
@@ -146,7 +206,8 @@ namespace Unity.Animations.SpringBones
         private Vector3 GetSumOfForcesOnBone(SpringBone springBone)
         {
             var sumOfForces = gravity;
-            var providerCount = forceProviders.Length;
+            // forceProviders is populated in Start; guard for calls in the same frame as Instantiate
+            var providerCount = (forceProviders != null) ? forceProviders.Length : 0;
             for (var providerIndex = 0; providerIndex < providerCount; ++providerIndex)
             {
                 var forceProvider = forceProviders[providerIndex];
@@ -181,6 +242,7 @@ namespace Unity.Animations.SpringBones
 
         private void LateUpdate()
         {
+            if (skipNextAutoUpdate) { skipNextAutoUpdate = false; return; }
             if (automaticUpdates) { UpdateDynamics(); }
         }
 
