@@ -1,0 +1,7 @@
+interface:
+  display_name: "UniCli — Unity Editor CLI"
+  short_description: "Control Unity Editor and memory snapshots via UniCli CLI"
+  default_prompt: "Use $uni-cli to automate Unity Editor with UniCli, compile scripts, run tests, and inspect memory snapshots."
+
+policy:
+  allow_implicit_invocation: true
