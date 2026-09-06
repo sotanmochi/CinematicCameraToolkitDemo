@@ -1,0 +1,36 @@
+/* 起動メニュー固有のものだけ。パネルやボタンの見た目は DemoCommon.uss を共用する。 */
+
+.menu-panel {
+    position: absolute;
+    top: 8%;
+    left: 50%;
+    translate: -50% 0;
+    width: 560px;
+    max-height: 84%;
+    padding: 20px 22px;
+    background-color: rgba(16, 18, 22, 0.88);
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.10);
+}
+
+.menu-title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgb(235, 238, 245);
+    margin-bottom: 16px;
+}
+
+.demo-button {
+    margin-bottom: 12px;
+    height: 36px;
+    font-size: 14px;
+    -unity-text-align: middle-left;
+    padding-left: 12px;
+}
+
+#menu-empty {
+    color: rgb(225, 160, 160);
+    white-space: normal;
+}

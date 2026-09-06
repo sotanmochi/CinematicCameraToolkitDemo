@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb3dba5caeb6499ca6a875ba71b5556, type: 3}
+  m_Name: DemoCatalog
+  m_EditorClassIdentifier: 
+  _entries:
+  - Title: Auto Framing
+    ScenePath: Assets/CinematicCameraToolkitDemo/Scenes/AutoFramingDemo.unity
+  - Title: Auto Framing + Cinemachine
+    ScenePath: Assets/CinematicCameraToolkitDemo/Scenes/AutoFramingCinemachineDemo.unity
+  - Title: Auto Framing + Timeline
+    ScenePath: Assets/CinematicCameraToolkitDemo/Scenes/AutoFramingTimelineDemo.unity

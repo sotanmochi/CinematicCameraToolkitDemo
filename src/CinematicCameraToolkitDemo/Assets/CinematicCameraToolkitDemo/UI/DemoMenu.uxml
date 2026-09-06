@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="DemoCommon.uss" />
+    <Style src="DemoMenu.uss" />
+
+    <ui:VisualElement name="root" class="root" picking-mode="Ignore">
+
+        <ui:ScrollView name="menu-panel" class="menu-panel">
+
+            <ui:Label text="Cinematic Camera Toolkit" class="menu-title" />
+
+            <!-- 中身は DemoMenuUI が DemoCatalog から作る -->
+            <ui:VisualElement name="demo-list" />
+
+        </ui:ScrollView>
+
+    </ui:VisualElement>
+</ui:UXML>
