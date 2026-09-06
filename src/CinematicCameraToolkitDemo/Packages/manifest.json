@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jp.sotanmochi.cinematic-camera-toolkit": "https://github.com/sotanmochi/CinematicCameraToolkit.git?path=src/CinematicCameraToolkit/Packages/CinematicCameraToolkit#0.2.0",
     "com.unity.ai.navigation": "2.0.11",
     "com.unity.cinemachine": "3.1.4",
     "com.unity.collab-proxy": "2.11.3",

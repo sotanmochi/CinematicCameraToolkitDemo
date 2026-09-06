@@ -266,6 +266,13 @@
       "dependencies": {},
       "hash": "9b64fa6cfcae7db2d40bff542e89f3869eedccac"
     },
+    "jp.sotanmochi.cinematic-camera-toolkit": {
+      "version": "https://github.com/sotanmochi/CinematicCameraToolkit.git?path=src/CinematicCameraToolkit/Packages/CinematicCameraToolkit#0.2.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cc9c273aab450e224fedaa3a3abf2a1f4708f6a0"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
