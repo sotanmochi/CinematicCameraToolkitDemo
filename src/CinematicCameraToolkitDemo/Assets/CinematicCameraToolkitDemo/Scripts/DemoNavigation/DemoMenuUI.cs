@@ -12,12 +12,23 @@ namespace CinematicCameraToolkitDemo.Navigation
     {
         [SerializeField] private DemoCatalog _catalog;
 
+        // Application.absoluteURL はシーン遷移後も変わらない。
+        // 起動時の DeepLink の処理を一度だけにしないと、メニューへ戻った直後に同じデモへ再遷移してしまう。
+        private static bool s_hasProcessedStartupDeepLink;
+
         private UIDocument _document;
         private bool _deepLinked;
+
+        // Domain Reload を無効にした Editor の Play Mode でも、新しい起動として扱えるように明示的に戻す。
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStartupDeepLinkState() => s_hasProcessedStartupDeepLink = false;
 
         private void Awake()
         {
             _document = GetComponent<UIDocument>();
+
+            if (s_hasProcessedStartupDeepLink) return;
+            s_hasProcessedStartupDeepLink = true;
 
             // URL でデモを指定されていれば、メニューを組まずにそのまま入る。
             // UIDocument を止めるのは、遷移までの 1 フレームでメニューが映るのを防ぐため。
