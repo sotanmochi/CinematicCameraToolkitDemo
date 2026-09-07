@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <!-- パネルもガイドも見た目は全デモ共通 -->
+    <Style src="DemoCommon.uss" />
+
+    <ui:VisualElement name="root" class="root" picking-mode="Ignore">
+
+        <!-- マージンガイド。位置は TimelineDemoUI が百分率で駆動する。
+             RenderTargetMargin.Percentage の定義とそのまま一致するので変換はいらない。 -->
+        <ui:VisualElement name="framing-guide" class="framing-guide" picking-mode="Ignore">
+            <ui:Label name="guide-left" class="guide-value guide-value--left" picking-mode="Ignore" />
+            <ui:Label name="guide-right" class="guide-value guide-value--right" picking-mode="Ignore" />
+            <ui:Label name="guide-top" class="guide-value guide-value--top" picking-mode="Ignore" />
+            <ui:Label name="guide-bottom" class="guide-value guide-value--bottom" picking-mode="Ignore" />
+        </ui:VisualElement>
+
+        <ui:VisualElement name="timeline-panel" class="panel panel--under-navigation">
+
+            <ui:Label text="Timeline" class="panel-title" />
+
+            <ui:VisualElement name="playback-group" class="group">
+                <ui:Button name="restart-button" text="Restart" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>

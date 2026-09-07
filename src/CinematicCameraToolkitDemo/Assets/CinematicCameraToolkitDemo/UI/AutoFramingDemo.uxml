@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="DemoCommon.uss" />
+
+    <!-- root と装飾系は picking-mode=Ignore。panel.Pick が null を返し、オービットのドラッグが通る -->
+    <ui:VisualElement name="root" class="root" picking-mode="Ignore">
+
+        <!-- 位置は AutoFramingDemoUI が百分率で駆動する -->
+        <ui:VisualElement name="framing-guide" class="framing-guide" picking-mode="Ignore">
+            <ui:Label name="guide-left" class="guide-value guide-value--left" picking-mode="Ignore" />
+            <ui:Label name="guide-right" class="guide-value guide-value--right" picking-mode="Ignore" />
+            <ui:Label name="guide-top" class="guide-value guide-value--top" picking-mode="Ignore" />
+            <ui:Label name="guide-bottom" class="guide-value guide-value--bottom" picking-mode="Ignore" />
+        </ui:VisualElement>
+
+        <!-- 左列: キャラクター側の操作。モード / ポーズ送り / 再生速度 -->
+        <ui:VisualElement name="character-panel" class="panel panel--under-navigation">
+
+            <ui:Label text="Character" class="panel-title" />
+
+            <ui:VisualElement name="mode-group" class="group">
+                <ui:Label text="Mode" class="group-title" />
+                <ui:VisualElement class="row">
+                    <ui:Button name="mode-animation" text="Animation" class="tab" />
+                    <ui:Button name="mode-pose" text="Pose" class="tab" />
+                </ui:VisualElement>
+                <ui:VisualElement name="pose-group">
+                    <ui:VisualElement class="row">
+                        <ui:Button name="pose-prev" text="&lt;&lt; Prev" class="flex-button" />
+                        <ui:Button name="pose-next" text="Next &gt;&gt;" class="flex-button" />
+                    </ui:VisualElement>
+                    <ui:Label name="pose-label" text="-" class="value-label" />
+                </ui:VisualElement>
+                <ui:VisualElement name="animation-group">
+                    <ui:Slider name="speed-slider" label="Speed" low-value="0.25" high-value="2"
+                               value="1" show-input-field="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- 左列: AutoFraming 側の操作。マージン / アラインメント / スムージング -->
+        <ui:ScrollView name="framing-panel" class="panel panel--under-navigation">
+
+            <ui:Label text="Auto Framing" class="panel-title" />
+
+            <ui:VisualElement name="framing-group" class="group">
+                <ui:Label text="Framing" class="group-title" />
+                <ui:Slider name="margin-top-slider" label="Margin T (%)" low-value="0" high-value="99.9"
+                           show-input-field="true" />
+                <ui:Slider name="margin-bottom-slider" label="Margin B (%)" low-value="0" high-value="99.9"
+                           show-input-field="true" />
+                <ui:Slider name="margin-left-slider" label="Margin L (%)" low-value="0" high-value="99.9"
+                           show-input-field="true" />
+                <ui:Slider name="margin-right-slider" label="Margin R (%)" low-value="0" high-value="99.9"
+                           show-input-field="true" />
+                <ui:DropdownField name="align-v-dropdown" label="Align V" />
+                <ui:DropdownField name="align-h-dropdown" label="Align H" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="smoothing-group" class="group">
+                <ui:Label text="Smoothing" class="group-title" />
+                <ui:Toggle name="smoothing-toggle" label="Smoothing" value="true" />
+                <ui:DropdownField name="preset-dropdown" label="Preset" />
+            </ui:VisualElement>
+
+        </ui:ScrollView>
+
+        <!-- 右列: カメラ操作。Cinemachine 版と違いショット / ブレンド / レンズは無い -->
+        <ui:ScrollView name="camera-panel" class="panel panel--right">
+
+            <ui:Label text="Camera" class="panel-title" />
+
+            <ui:VisualElement name="camera-group" class="group">
+                <ui:Label text="Orbit" class="group-title" />
+                <ui:Label name="orbit-hint" class="hint"
+                          text="ドラッグ / スワイプ / 方向キーで回転。" />
+                <ui:Slider name="sensitivity-slider" label="Sensitivity" low-value="0.1" high-value="1"
+                           value="0.5" show-input-field="true" />
+                <ui:Toggle name="auto-orbit-toggle" label="Auto orbit" value="false" />
+                <ui:Button name="reset-view-button" text="Reset View" />
+            </ui:VisualElement>
+
+        </ui:ScrollView>
+
+    </ui:VisualElement>
+</ui:UXML>

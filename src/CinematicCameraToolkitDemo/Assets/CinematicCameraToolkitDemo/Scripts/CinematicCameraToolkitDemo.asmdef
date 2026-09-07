@@ -1,0 +1,21 @@
+{
+    "name": "CinematicCameraToolkitDemo",
+    "rootNamespace": "CinematicCameraToolkitDemo",
+    "references": [
+        "CinematicCameraToolkit",
+        "CinematicCameraToolkit.CinemachineExtensions",
+        "Unity.Cinemachine",
+        "Unity.Timeline",
+        "Unity.InputSystem",
+        "com.unity.animations.springbone"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
