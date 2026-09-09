@@ -108,6 +108,17 @@
         canvas.style.height = "720px";
       }
 
+      // iOS / Android は DXT、一般的なデスクトップは ASTC をネイティブ対応していない。
+      // 未対応形式は RGBA32 に展開され、このデモの 8K テクスチャではメモリ不足によるクラッシュを招く。
+      // それを避けるため、実行環境が ASTC 対応なら ASTC 版 .data へ切り替える。
+      (function () {
+        var canvas = document.createElement("canvas");
+        var gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+        if (gl && gl.getExtension("WEBGL_compressed_texture_astc")) {
+          config.dataUrl = buildUrl + "/CinematicCameraToolkitDemo.mobile.data.unityweb";
+        }
+      })();
+      
       document.querySelector("#unity-loading-bar").style.display = "block";
 
       var script = document.createElement("script");
