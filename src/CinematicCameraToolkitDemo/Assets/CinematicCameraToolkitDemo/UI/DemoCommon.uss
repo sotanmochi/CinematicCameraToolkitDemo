@@ -286,8 +286,100 @@ Button:disabled {
     top: 16px;
 }
 
+/* 案内が続く間は上の線だけでいいが、最後の 1 行は下も締めてボタンと分ける。 */
+.key-hint--last {
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+
+/* キー案内の下に置くので、案内の行間と同じだけ離して独立させる。 */
+#credits-button {
+    margin-top: 10px;
+}
+
 /* 左列。共通ヘッダの下へ、UXML に書いた順で縦に積む。
    top は DemoNavigationUI が実測して入れる（ヘッダや前のパネルの高さで変わるため）。 */
 .panel--under-navigation {
     left: 16px;
+}
+
+/* --- 権利表記オーバーレイ（DemoCreditsPanel がコードで組む） --- */
+
+/* 画面全面を覆う。開いている間は panel.Pick がここを返すので、カメラ操作も止まる。 */
+.credits-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    align-items: center;
+    justify-content: center;
+}
+
+/* .panel は absolute 配置なので、中央寄せが効くよう relative に戻す。
+   表記は読ませるものなので、操作パネルより背景を濃くする。 */
+.credits-panel {
+    position: relative;
+    width: 560px;
+    max-width: 92%;
+    max-height: 84%;
+    padding: 20px 22px;
+    background-color: rgba(16, 18, 22, 0.96);
+}
+
+.credits-list {
+    flex-grow: 1;
+}
+
+/* ユニティちゃんライセンスのロゴ。暗いパネルに載せるので Dark 版（白抜き）を使う。
+   140x121 の原寸比のまま縮める。 */
+.ucl-logo {
+    width: 112px;
+    height: 97px;
+    margin-bottom: 12px;
+    align-self: center;
+    background-image: url("../../ThirdParty/UnityChanKAGURA/License/UCL2.0/License Logo/Others/png/Dark_Silhouette.png");
+    background-size: contain;
+}
+
+.credits-entry {
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.10);
+}
+
+.credits-entry__title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    color: rgb(150, 205, 255);
+    margin-bottom: 4px;
+}
+
+.credits-entry__body {
+    font-size: 12px;
+    color: rgb(220, 226, 236);
+    white-space: normal;
+}
+
+/* URL はそのまま出してリンクにもする。長いものがあるので折り返す（切れると読めない）。 */
+.credits-link {
+    height: auto;
+    max-width: 100%;
+    margin: 4px 0 0 0;
+    padding: 3px 6px;
+    font-size: 11px;
+    white-space: normal;
+    -unity-text-align: middle-left;
+    align-self: flex-start;
+    color: rgb(150, 190, 235);
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+#credits-close {
+    margin-top: 12px;
+    align-self: flex-end;
+    width: 96px;
 }

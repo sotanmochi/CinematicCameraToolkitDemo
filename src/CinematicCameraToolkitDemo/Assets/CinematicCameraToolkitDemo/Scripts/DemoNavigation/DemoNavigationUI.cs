@@ -36,6 +36,7 @@ namespace CinematicCameraToolkitDemo.Navigation
 
         private VisualElement _root;
         private VisualElement _navigationPanel;
+        private DemoCreditsPanel _credits;
         private bool _bound;
         private bool _uiHidden;
 
@@ -72,7 +73,13 @@ namespace CinematicCameraToolkitDemo.Navigation
             var keyboard = Keyboard.current;
             if (keyboard == null) return;
 
-            if (keyboard[_backKey].wasPressedThisFrame) ReturnToMenu();
+            if (keyboard[_backKey].wasPressedThisFrame)
+            {
+                // 権利表記を開いている間は、そちらを閉じるだけに使う。
+                if (_credits.IsOpen) _credits.Close();
+                else ReturnToMenu();
+            }
+
             if (keyboard[_toggleVisibilityKey].wasPressedThisFrame) ToggleVisibility();
         }
 
@@ -84,6 +91,7 @@ namespace CinematicCameraToolkitDemo.Navigation
             _root = _document != null ? _document.rootVisualElement : null;
             if (_root == null) return false;
 
+            _credits = new DemoCreditsPanel(_root);
             _navigationPanel = BuildNavigationPanel();
 
             // デモ側のパネルより先に積んで、常に左上に出るようにする。
@@ -114,7 +122,14 @@ namespace CinematicCameraToolkitDemo.Navigation
             panel.Add(menuButton);
 
             panel.Add(CreateKeyHint(_backKey, "メニューへ戻る"));
-            panel.Add(CreateKeyHint(_toggleVisibilityKey, "UI の表示を切り替え"));
+
+            // 最後の案内だけ下にも線を引いて、続くボタンと切り分ける。
+            var lastHint = CreateKeyHint(_toggleVisibilityKey, "UI の表示を切り替え");
+            lastHint.AddToClassList("key-hint--last");
+            panel.Add(lastHint);
+
+            var creditsButton = new Button(_credits.Toggle) { name = "credits-button", text = "Licenses" };
+            panel.Add(creditsButton);
 
             return panel;
         }
